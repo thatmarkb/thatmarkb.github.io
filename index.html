@@ -296,34 +296,39 @@
         <p style="margin:0 0 12px; color: var(--muted); font-size:14px;">
           Give me a sentence on what you’re building and where you’re stuck. I’ll reply with next steps.
         </p>
-
-        <!-- Option 1 (works immediately): mailto button -->
-        <div class="ctaRow" style="margin-bottom:14px;">
-          <a class="btn primary" href="mailto:hello@tmbpg.com?subject=TMBPG%20project%20inquiry">Email me</a>
-          <a class="btn" href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn</a>
-        </div>
-
-        <!-- Option 2 (recommended): Formspree/Fabform endpoint.
-             Replace action URL once you pick a provider. -->
-        <form id="contactForm" method="POST" action="https://formspree.io/f/YOUR_FORM_ID">
+        <form 
+          id="contactForm"
+          method="POST" 
+          action="https://formspree.io/f/xkovrzeg">
+          <!-- Honeypot (spam trap) -->
+          <input type="text" name="_gotcha" style="display:none">
+        
+          <!-- Optional redirect (remove if using inline success message instead) -->
+          <!-- <input type="hidden" name="_redirect" value="https://tmbpg.com/thanks.html"> -->
+        
           <div class="grid2">
             <div>
               <label for="name">Name</label>
-              <input id="name" name="name" autocomplete="name" required />
+              <input id="name" name="name" required />
             </div>
+        
             <div>
               <label for="email">Email</label>
-              <input id="email" name="email" type="email" autocomplete="email" required />
+              <input id="email" type="email" name="email" required />
             </div>
           </div>
-
+        
+          <label for="company">Company (optional)</label>
+          <input id="company" name="company" />
+        
           <label for="message">Message</label>
           <textarea id="message" name="message" required></textarea>
-
-          <div class="ctaRow" style="margin-top:12px;">
-            <button class="btn primary" type="submit">Send</button>
-            <span id="formNote" style="color:var(--muted); font-size:12.5px; align-self:center;"></span>
-          </div>
+        
+          <button class="btn primary" type="submit">
+            Start the conversation
+          </button>
+        
+          <p id="formStatus" style="margin-top:12px;font-size:13px;color:#969896;"></p>
         </form>
       </section>
 
@@ -335,14 +340,34 @@
   </div>
 
   <script>
-    document.getElementById("year").textContent = String(new Date().getFullYear());
-
-    // Tiny UX guard so you don't forget to set the form endpoint:
     const form = document.getElementById("contactForm");
-    const note = document.getElementById("formNote");
-    if (form.action.includes("YOUR_FORM_ID")) {
-      note.textContent = "Form is in placeholder mode — set your form endpoint (or rely on Email me).";
-    }
+    const status = document.getElementById("formStatus");
+  
+    form.addEventListener("submit", async function(e) {
+      e.preventDefault();
+  
+      const data = new FormData(form);
+  
+      try {
+        const response = await fetch(form.action, {
+          method: form.method,
+          body: data,
+          headers: {
+            'Accept': 'application/json'
+          }
+        });
+  
+        if (response.ok) {
+          status.textContent = "Thanks — message received. I’ll reply shortly.";
+          form.reset();
+        } else {
+          status.textContent = "Something went wrong. Please email hello@tmbpg.com directly.";
+        }
+      } catch (error) {
+        status.textContent = "Network error. Please email hello@tmbpg.com directly.";
+      }
+    });
   </script>
 </body>
 </html>
+
