@@ -1,0 +1,551 @@
+<!doctype html>
+<!--
+  index_v1b.html — "Brief"
+  Layout: Asymmetric two-column hero (headline/CTA left, specialty tag-stack right);
+  three-column capability cards with accent-bar treatment below; two-panel
+  contact section (framing copy left, form right) on a slightly lifted background.
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="TMB Product Group — 15+ years product and program leadership across Fortune 100 and 500 organizations." />
+  <title>TMB Product Group</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lato:wght@700;900&display=swap" rel="stylesheet">
+  <style>
+    /* === Reset === */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* === Tokens === */
+    :root {
+      --bg:       #1d1f21;
+      --bg-lift:  #212426;
+      --text:     #c5c8c6;
+      --muted:    #969896;
+      --blue:     #0D4F7C;
+      --blue-hi:  #1E7FB6;
+      --border:   rgba(150, 152, 150, 0.12);
+      --f-body:   Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      --f-head:   Lato, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--f-body);
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+
+    /* === Nav === */
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.1rem 3rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .logo {
+      font-family: var(--f-head);
+      font-weight: 700;
+      font-size: 0.88rem;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--text);
+    }
+
+    /* === Button === */
+    .btn {
+      display: inline-block;
+      font-family: var(--f-body);
+      font-size: 0.875rem;
+      font-weight: 600;
+      padding: 0.65rem 1.5rem;
+      border-radius: 3px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.15s;
+    }
+
+    .btn-solid {
+      background: var(--blue);
+      color: #fff;
+    }
+
+    .btn-solid:hover,
+    .btn-solid:focus-visible {
+      background: var(--blue-hi);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--blue-hi);
+      border: 1px solid var(--blue-hi);
+    }
+
+    .btn-outline:hover,
+    .btn-outline:focus-visible {
+      background: rgba(30, 127, 182, 0.08);
+    }
+
+    .btn:focus-visible {
+      outline: 2px solid var(--blue-hi);
+      outline-offset: 3px;
+    }
+
+    /* === Wide container === */
+    .wrap {
+      max-width: 76rem;
+      margin: 0 auto;
+      padding: 0 3rem;
+    }
+
+    /* === Hero === */
+    .hero {
+      padding: 5.5rem 3rem 5rem;
+      max-width: 76rem;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 3fr 2fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    .hero-left {}
+
+    .eyebrow {
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--blue-hi);
+      margin-bottom: 1.25rem;
+    }
+
+    h1 {
+      font-family: var(--f-head);
+      font-weight: 900;
+      font-size: clamp(2rem, 4.5vw, 3.25rem);
+      line-height: 1.07;
+      color: var(--text);
+      letter-spacing: -0.01em;
+      margin-bottom: 1.25rem;
+    }
+
+    .hero-sub {
+      font-size: 1rem;
+      line-height: 1.65;
+      color: var(--muted);
+      margin-bottom: 2.25rem;
+      max-width: 36rem;
+    }
+
+    /* === Specialty list (hero right) === */
+    .hero-right {
+      border-left: 1px solid var(--border);
+      padding-left: 3rem;
+    }
+
+    .specialty-label {
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 1.25rem;
+    }
+
+    .specialty-list {
+      list-style: none;
+    }
+
+    .specialty-list li {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.7rem 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.9rem;
+      color: var(--text);
+    }
+
+    .specialty-list li:last-child {
+      border-bottom: none;
+    }
+
+    .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--blue-hi);
+      flex-shrink: 0;
+    }
+
+    /* === Section header === */
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1.25rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .section-header h2 {
+      font-family: var(--f-head);
+      font-weight: 700;
+      font-size: 1.35rem;
+      color: var(--text);
+      line-height: 1.2;
+    }
+
+    .section-rule {
+      flex: 1;
+      border: none;
+      border-top: 1px solid var(--border);
+    }
+
+    /* === Capabilities === */
+    .capabilities {
+      padding: 5rem 3rem;
+      max-width: 76rem;
+      margin: 0 auto;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+    }
+
+    .card {
+      border-top: 2px solid var(--blue);
+      background: rgba(13, 79, 124, 0.06);
+      border-radius: 0 0 5px 5px;
+      padding: 1.4rem 1.5rem 1.5rem;
+      transition: border-top-color 0.15s;
+    }
+
+    .card:hover {
+      border-top-color: var(--blue-hi);
+    }
+
+    .card-num {
+      font-family: var(--f-head);
+      font-weight: 900;
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      color: var(--blue-hi);
+      margin-bottom: 0.75rem;
+    }
+
+    .card-title {
+      font-family: var(--f-head);
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+    }
+
+    .card-desc {
+      font-size: 0.84rem;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    /* === Contact band === */
+    .contact-band {
+      background: var(--bg-lift);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .contact-inner {
+      max-width: 76rem;
+      margin: 0 auto;
+      padding: 5rem 3rem 6rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: start;
+    }
+
+    .contact-info {}
+
+    .contact-info h2 {
+      font-family: var(--f-head);
+      font-weight: 700;
+      font-size: 1.875rem;
+      line-height: 1.15;
+      color: var(--text);
+      margin-bottom: 1rem;
+    }
+
+    .contact-info p {
+      font-size: 0.95rem;
+      color: var(--muted);
+      line-height: 1.65;
+      margin-bottom: 1.5rem;
+    }
+
+    /* === Form === */
+    .field { margin-bottom: 1rem; }
+
+    label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--muted);
+      margin-bottom: 0.3rem;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    textarea {
+      display: block;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 0.65rem 0.85rem;
+      color: var(--text);
+      font-family: var(--f-body);
+      font-size: 0.95rem;
+      line-height: 1.5;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+
+    input[type="text"]:focus,
+    input[type="email"]:focus,
+    textarea:focus {
+      outline: none;
+      border-color: var(--blue-hi);
+      box-shadow: 0 0 0 3px rgba(30, 127, 182, 0.12);
+    }
+
+    textarea { min-height: 7rem; resize: vertical; }
+
+    .btn-block {
+      display: block;
+      width: 100%;
+      padding: 0.75rem;
+      font-size: 0.95rem;
+      text-align: center;
+      margin-top: 0.25rem;
+    }
+
+    .form-success {
+      display: none;
+      background: rgba(13, 79, 124, 0.1);
+      border: 1px solid rgba(30, 127, 182, 0.28);
+      border-radius: 6px;
+      padding: 1.5rem;
+      font-size: 0.95rem;
+      color: var(--text);
+    }
+
+    /* === Footer === */
+    footer {
+      padding: 1.75rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    footer .logo-sm {
+      font-family: var(--f-head);
+      font-weight: 700;
+      font-size: 0.78rem;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+    }
+
+    /* === Responsive === */
+    @media (max-width: 880px) {
+      .hero, .contact-inner {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+
+      .hero-right {
+        border-left: none;
+        border-top: 1px solid var(--border);
+        padding-left: 0;
+        padding-top: 2rem;
+      }
+
+      .card-grid { grid-template-columns: repeat(2, 1fr); }
+
+      .hero, .capabilities, .contact-inner { padding-left: 1.5rem; padding-right: 1.5rem; }
+      footer { padding-left: 1.5rem; padding-right: 1.5rem; }
+    }
+
+    @media (max-width: 560px) {
+      .card-grid { grid-template-columns: 1fr; }
+      footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <nav class="nav">
+    <a href="#" class="logo">TMB Product Group</a>
+    <a href="#contact" class="btn btn-solid">Connect</a>
+  </nav>
+</header>
+
+<main>
+
+  <!-- Hero: split two-column -->
+  <section class="hero" aria-labelledby="hero-h1">
+    <div class="hero-left">
+      <p class="eyebrow">Product &amp; Program Leadership</p>
+      <h1 id="hero-h1">Engineering Depth.<br>Enterprise Scale.</h1>
+      <p class="hero-sub">
+        15+ years leading product and programs in Fortune 100 and 500 environments.
+        Engineering and project management background applied where data, APIs,
+        AI, and delivery meet.
+      </p>
+      <a href="#contact" class="btn btn-solid">Let's Talk</a>
+    </div>
+
+    <div class="hero-right" aria-label="Areas of focus">
+      <p class="specialty-label">Focus Areas</p>
+      <ul class="specialty-list">
+        <li><span class="dot" aria-hidden="true"></span>Data &amp; Business Intelligence</li>
+        <li><span class="dot" aria-hidden="true"></span>API Strategy &amp; Platform</li>
+        <li><span class="dot" aria-hidden="true"></span>AI Enablement</li>
+        <li><span class="dot" aria-hidden="true"></span>DevOps &amp; Delivery</li>
+        <li><span class="dot" aria-hidden="true"></span>Program Leadership</li>
+        <li><span class="dot" aria-hidden="true"></span>Engineering Foundation</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Capabilities: 3-column cards -->
+  <section class="capabilities" aria-labelledby="cap-h2">
+    <div class="section-header">
+      <h2 id="cap-h2">Core Capabilities</h2>
+      <hr class="section-rule" aria-hidden="true" />
+    </div>
+    <div class="card-grid" role="list">
+
+      <div class="card" role="listitem">
+        <p class="card-num">01</p>
+        <p class="card-title">Data &amp; Business Intelligence</p>
+        <p class="card-desc">End-to-end data product ownership — from pipeline architecture to executive-ready dashboards and self-serve analytics.</p>
+      </div>
+
+      <div class="card" role="listitem">
+        <p class="card-num">02</p>
+        <p class="card-title">API Strategy &amp; Platform</p>
+        <p class="card-desc">Internal and partner API programs built for reliability, governance, versioning, and long-term adoption.</p>
+      </div>
+
+      <div class="card" role="listitem">
+        <p class="card-num">03</p>
+        <p class="card-title">AI Enablement</p>
+        <p class="card-desc">Translating AI capability into shipped product — scoping, roadmapping, and moving from proof of concept to production.</p>
+      </div>
+
+      <div class="card" role="listitem">
+        <p class="card-num">04</p>
+        <p class="card-title">DevOps &amp; Delivery</p>
+        <p class="card-desc">CI/CD discipline, observability culture, and release practices that scale alongside engineering teams.</p>
+      </div>
+
+      <div class="card" role="listitem">
+        <p class="card-num">05</p>
+        <p class="card-title">Program Leadership</p>
+        <p class="card-desc">Cross-functional programs connecting engineering, design, operations, and executive stakeholders around shared outcomes.</p>
+      </div>
+
+      <div class="card" role="listitem">
+        <p class="card-num">06</p>
+        <p class="card-title">Engineering Foundation</p>
+        <p class="card-desc">Hands-on technical background that narrows the gap between product ambition and what engineering can actually deliver.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Contact: two-panel band -->
+  <div class="contact-band" id="contact">
+    <div class="contact-inner">
+
+      <div class="contact-info" aria-labelledby="contact-h2">
+        <h2 id="contact-h2">Let's Build Something Together</h2>
+        <p>
+          Whether you're scaling a data platform, navigating an AI product question,
+          or need experienced program leadership — reach out.
+        </p>
+        <a href="mailto:" class="btn btn-outline" aria-label="Send email">Reach Out</a>
+      </div>
+
+      <div>
+        <div class="form-success" id="v1b-success" role="status" aria-live="polite">
+          Message received &mdash; I'll be in touch.
+        </div>
+        <form id="v1b-form" action="https://formspree.io/f/xkovrzeg" method="POST" novalidate>
+          <div class="field">
+            <label for="v1b-name">Name</label>
+            <input type="text" id="v1b-name" name="name" required autocomplete="name" />
+          </div>
+          <div class="field">
+            <label for="v1b-email">Email</label>
+            <input type="email" id="v1b-email" name="email" required autocomplete="email" />
+          </div>
+          <div class="field">
+            <label for="v1b-message">Message</label>
+            <textarea id="v1b-message" name="message" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-solid btn-block">Send</button>
+        </form>
+      </div>
+
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <a href="#" class="logo-sm">TMB Product Group</a>
+  <p>&copy; 2026</p>
+</footer>
+
+<script>
+  (function () {
+    var form = document.getElementById('v1b-form');
+    var success = document.getElementById('v1b-success');
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { Accept: 'application/json' }
+      }).then(function (res) {
+        if (res.ok) {
+          form.hidden = true;
+          success.style.display = 'block';
+        } else {
+          form.submit();
+        }
+      }).catch(function () {
+        form.submit();
+      });
+    });
+  }());
+</script>
+
+</body>
+</html>

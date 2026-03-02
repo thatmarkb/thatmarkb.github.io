@@ -1,0 +1,407 @@
+<!doctype html>
+<!--
+  index_v1a.html — "Signal"
+  Layout: Pure centered single-column. Eyebrow → large H1 → subtitle → CTA.
+  Capability chips in a responsive 3×2 grid. Narrow centered contact form.
+  Restrained, typography-first, confident.
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="TMB Product Group — 15+ years product and program leadership across Fortune 100 and 500 organizations." />
+  <title>TMB Product Group</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lato:wght@700;900&display=swap" rel="stylesheet">
+  <style>
+    /* === Reset === */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* === Tokens === */
+    :root {
+      --bg:      #1d1f21;
+      --text:    #c5c8c6;
+      --muted:   #969896;
+      --blue:    #0D4F7C;
+      --blue-hi: #1E7FB6;
+      --border:  rgba(150, 152, 150, 0.13);
+      --f-body:  Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      --f-head:  Lato, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--f-body);
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+
+    /* === Nav === */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+    }
+
+    .logo {
+      font-family: var(--f-head);
+      font-weight: 700;
+      font-size: 0.9rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--text);
+    }
+
+    /* === Button === */
+    .btn {
+      display: inline-block;
+      font-family: var(--f-body);
+      font-size: 0.875rem;
+      font-weight: 600;
+      padding: 0.6rem 1.4rem;
+      border-radius: 3px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.15s ease;
+    }
+
+    .btn-solid {
+      background: var(--blue);
+      color: #fff;
+    }
+
+    .btn-solid:hover,
+    .btn-solid:focus-visible {
+      background: var(--blue-hi);
+    }
+
+    .btn:focus-visible {
+      outline: 2px solid var(--blue-hi);
+      outline-offset: 3px;
+    }
+
+    /* === Hero === */
+    .hero {
+      text-align: center;
+      max-width: 44rem;
+      margin: 0 auto;
+      padding: 6.5rem 2rem 5rem;
+    }
+
+    .eyebrow {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--blue-hi);
+      margin-bottom: 1.5rem;
+    }
+
+    h1 {
+      font-family: var(--f-head);
+      font-weight: 900;
+      font-size: clamp(2.25rem, 5.5vw, 3.5rem);
+      line-height: 1.06;
+      color: var(--text);
+      letter-spacing: -0.01em;
+      margin-bottom: 1.25rem;
+    }
+
+    .hero-sub {
+      font-size: 1.05rem;
+      line-height: 1.6;
+      color: var(--muted);
+      margin-bottom: 2.5rem;
+    }
+
+    /* === Divider === */
+    .divider {
+      border: none;
+      border-top: 1px solid var(--border);
+    }
+
+    /* === Capabilities === */
+    .capabilities {
+      max-width: 60rem;
+      margin: 0 auto;
+      padding: 5rem 2rem;
+    }
+
+    .section-label {
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-align: center;
+      margin-bottom: 2.75rem;
+    }
+
+    .chip-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+
+    .chip {
+      background: rgba(13, 79, 124, 0.07);
+      border: 1px solid rgba(13, 79, 124, 0.22);
+      border-radius: 6px;
+      padding: 1.4rem 1.5rem;
+      transition: border-color 0.15s ease;
+    }
+
+    .chip:hover {
+      border-color: rgba(30, 127, 182, 0.42);
+    }
+
+    .chip-title {
+      font-family: var(--f-head);
+      font-weight: 700;
+      font-size: 0.92rem;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+    }
+
+    .chip-desc {
+      font-size: 0.84rem;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    /* === Contact === */
+    .contact {
+      max-width: 32rem;
+      margin: 0 auto;
+      padding: 5rem 2rem 8rem;
+    }
+
+    h2 {
+      font-family: var(--f-head);
+      font-weight: 700;
+      font-size: 1.75rem;
+      line-height: 1.15;
+      color: var(--text);
+      text-align: center;
+      margin-bottom: 0.5rem;
+    }
+
+    .contact-sub {
+      font-size: 0.9rem;
+      color: var(--muted);
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .field { margin-bottom: 1rem; }
+
+    label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--muted);
+      margin-bottom: 0.3rem;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    textarea {
+      display: block;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 0.65rem 0.85rem;
+      color: var(--text);
+      font-family: var(--f-body);
+      font-size: 0.95rem;
+      line-height: 1.5;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+
+    input[type="text"]:focus,
+    input[type="email"]:focus,
+    textarea:focus {
+      outline: none;
+      border-color: var(--blue-hi);
+      box-shadow: 0 0 0 3px rgba(30, 127, 182, 0.12);
+    }
+
+    textarea { min-height: 7rem; resize: vertical; }
+
+    .btn-block {
+      display: block;
+      width: 100%;
+      padding: 0.75rem;
+      font-size: 0.95rem;
+      text-align: center;
+      margin-top: 0.25rem;
+    }
+
+    .form-success {
+      display: none;
+      background: rgba(13, 79, 124, 0.1);
+      border: 1px solid rgba(30, 127, 182, 0.28);
+      border-radius: 6px;
+      padding: 1.5rem;
+      text-align: center;
+      font-size: 0.95rem;
+      color: var(--text);
+    }
+
+    /* === Footer === */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 1.5rem 2rem;
+      text-align: center;
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    /* === Responsive === */
+    @media (max-width: 640px) {
+      .chip-grid { grid-template-columns: 1fr; }
+      .nav { padding: 1rem 1.25rem; }
+      .hero { padding: 4rem 1.25rem 3.5rem; }
+      .capabilities, .contact { padding-left: 1.25rem; padding-right: 1.25rem; }
+    }
+
+    @media (min-width: 641px) and (max-width: 900px) {
+      .chip-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <nav class="nav">
+    <a href="#" class="logo">TMB Product Group</a>
+    <a href="#contact" class="btn btn-solid">Connect</a>
+  </nav>
+</header>
+
+<main>
+
+  <!-- Hero -->
+  <section class="hero" aria-labelledby="hero-h1">
+    <p class="eyebrow">Product &middot; Program &middot; Engineering</p>
+    <h1 id="hero-h1">15+ Years Building What Scales</h1>
+    <p class="hero-sub">
+      Engineering roots and program rigor applied to data, business intelligence,
+      APIs, AI enablement, and DevOps &mdash; across Fortune 100 and 500 organizations.
+    </p>
+    <a href="#contact" class="btn btn-solid">Let's Talk</a>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- Capabilities -->
+  <section class="capabilities" aria-labelledby="cap-label">
+    <p class="section-label" id="cap-label">Core Capabilities</p>
+    <div class="chip-grid" role="list">
+
+      <div class="chip" role="listitem">
+        <p class="chip-title">Data &amp; Business Intelligence</p>
+        <p class="chip-desc">End-to-end data product ownership — pipelines, modeling, and executive-ready dashboards.</p>
+      </div>
+
+      <div class="chip" role="listitem">
+        <p class="chip-title">API Strategy &amp; Platform</p>
+        <p class="chip-desc">Internal and partner API programs built for reliability, governance, and sustainable adoption.</p>
+      </div>
+
+      <div class="chip" role="listitem">
+        <p class="chip-title">AI Enablement</p>
+        <p class="chip-desc">Scoping and shipping AI-powered features from proof of concept to production roadmap.</p>
+      </div>
+
+      <div class="chip" role="listitem">
+        <p class="chip-title">DevOps &amp; Delivery</p>
+        <p class="chip-desc">CI/CD discipline, observability culture, and release velocity that grows with teams.</p>
+      </div>
+
+      <div class="chip" role="listitem">
+        <p class="chip-title">Program Leadership</p>
+        <p class="chip-desc">Cross-functional programs spanning engineering, design, operations, and executive stakeholders.</p>
+      </div>
+
+      <div class="chip" role="listitem">
+        <p class="chip-title">Engineering Foundation</p>
+        <p class="chip-desc">Technical depth that closes the gap between product ambition and engineering execution.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- Contact -->
+  <section class="contact" id="contact" aria-labelledby="contact-h2">
+    <h2 id="contact-h2">Get in Touch</h2>
+    <p class="contact-sub">Let's talk about what you're building.</p>
+
+    <div class="form-success" id="v1a-success" role="status" aria-live="polite">
+      Message received &mdash; I'll be in touch.
+    </div>
+
+    <form id="v1a-form" action="https://formspree.io/f/xkovrzeg" method="POST" novalidate>
+      <div class="field">
+        <label for="v1a-name">Name</label>
+        <input type="text" id="v1a-name" name="name" required autocomplete="name" />
+      </div>
+      <div class="field">
+        <label for="v1a-email">Email</label>
+        <input type="email" id="v1a-email" name="email" required autocomplete="email" />
+      </div>
+      <div class="field">
+        <label for="v1a-message">Message</label>
+        <textarea id="v1a-message" name="message" required></textarea>
+      </div>
+      <button type="submit" class="btn btn-solid btn-block">Send</button>
+    </form>
+  </section>
+
+</main>
+
+<footer>
+  <p>&copy; 2026 TMB Product Group</p>
+</footer>
+
+<script>
+  (function () {
+    var form = document.getElementById('v1a-form');
+    var success = document.getElementById('v1a-success');
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { Accept: 'application/json' }
+      }).then(function (res) {
+        if (res.ok) {
+          form.hidden = true;
+          success.style.display = 'block';
+        } else {
+          form.submit();
+        }
+      }).catch(function () {
+        form.submit();
+      });
+    });
+  }());
+</script>
+
+</body>
+</html>
